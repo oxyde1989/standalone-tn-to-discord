@@ -6,6 +6,10 @@ __version__ = "0.01"
 def append_log(content, v_debug_enabled):
     if v_debug_enabled:        
         print(content)
+        
+def validate_webhook_domain(v_webhook):
+    pattern = r"^https://discord\.com/api/webhooks/\d+/[A-Za-z0-9_\-]+$"
+    return re.match(pattern, v_webhook) is not None        
 
 def check_for_update(local_version):  
     github_raw_url = "https://raw.githubusercontent.com/oxyde1989/standalone-tn-to-discord/refs/heads/main/tn-to-discord.py"
@@ -48,7 +52,17 @@ if __name__ == "__main__":
     
     append_log("Start process", debug_enabled)
     if check_for_update(__version__):
-        print(">> NEW VERSION AVAILABLE ON GITHUB. Consider to upgrade! >>")        
+        print(">> NEW VERSION AVAILABLE ON GITHUB. Consider to upgrade! >>")  
+        
+    append_log("Check message len", debug_enabled)    
+    if len(message) > 2000: 
+        print("ERROR: message too long") 
+        sys.exit(1)   
+        
+    append_log("Check webhook domain", debug_enabled)      
+    if not validate_webhook_domain(webhook):
+        print("ERROR: Invalid Discord webhook URL?")
+        sys.exit(1)      
     
     append_log("Check sender", debug_enabled)
     if not sender:
