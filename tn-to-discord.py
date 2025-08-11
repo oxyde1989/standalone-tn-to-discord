@@ -29,7 +29,6 @@ def send_discord_message(v_webhook, v_message, v_sender=None): #messages are rai
         r = requests.post(v_webhook, json=payload, timeout=20)
         r.raise_for_status()
         print("Message Sent. Exiting...")
-        sys.exit(0)
     except requests.exceptions.RequestException as e:
         print(f"ERROR: {e}") 
         sys.exit(1)
@@ -68,7 +67,4 @@ if __name__ == "__main__":
         append_log("Sender has been applied from args", debug_enabled)    
     append_log("Trying sending message", debug_enabled)        
     send_discord_message(webhook, message, sender)
-    
-    
-    
-    
+    sys.exit(0)
