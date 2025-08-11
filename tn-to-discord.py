@@ -8,7 +8,7 @@ def append_log(content, v_debug_enabled):
         print(content)
 
 def check_for_update(local_version):  
-    github_raw_url = "https://raw.githubusercontent.com/oxyde1989/***.py"
+    github_raw_url = "https://raw.githubusercontent.com/oxyde1989/standalone-tn-to-discord/refs/heads/main/tn-to-discord.py"
     try:
         with urllib.request.urlopen(github_raw_url, timeout=5) as response:
             content = response.read().decode("utf-8")
@@ -35,7 +35,7 @@ def send_discord_message(v_webhook, v_message, v_sender=None): #messages are rai
         sys.exit(1)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="stand alone wrapper to send messages from Truenas to Discord via API")
+    parser = argparse.ArgumentParser(description="standalone wrapper to send messages from Truenas to Discord via API")
     parser.add_argument("-w", "--webhook", required=True, help="Discord Webhook endpoint")
     parser.add_argument("-m", "--message", required=True, help="Message. Only direct plain-text/markdown supported")    
     parser.add_argument("-s", "--sender", help="OPTIONAL sender name")
@@ -66,5 +66,9 @@ if __name__ == "__main__":
             sender = "Truenas BOT"
     else:
         append_log("Sender has been applied from args", debug_enabled)    
-    append_log("Tryng sending message", debug_enabled)        
+    append_log("Trying sending message", debug_enabled)        
     send_discord_message(webhook, message, sender)
+    
+    
+    
+    
