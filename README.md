@@ -23,6 +23,22 @@ The script shouldn't require particular privilegies, but ensure to only run it i
 
 ---
 
+## 🚧 Plugin
+
+Plugin will help retrieving data and incapsulate a message for the `tn-to-discord.py`.
+
+> plugin_disktemp.sh
+
+run this script in a cronjob, set a threshold temp, and get a message if a disk exceeds that. Credit to @scarbrtj from TN forums for the idea and some line of code 
+
+```bash
+
+THRESHOLD=50 DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/**" ./disktemp.sh
+
+```
+
+optional args `--sender` (the name of the sender for the message) or `--show-output` (to print the result into shell) can be passed
+
 ## 🙋‍♂️ For any problem or improvements let me know!
 
 ---
